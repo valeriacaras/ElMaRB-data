@@ -6,6 +6,7 @@
 
 *Date: 15 November 2021*
 
+[![DOI](https://zenodo.org/badge/427669912.svg)](https://zenodo.org/badge/latestdoi/427669912) 
 
 *[Electoral Malpractice, Cyber-security, and Political Consequences in Russia and Beyond Project](url) is funded by the University of Helsinki and is based in Aleksanteri Institute, Helsinki, Finland*
 
