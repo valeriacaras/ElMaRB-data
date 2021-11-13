@@ -16,6 +16,8 @@
 
 #### About the dataset
 
+The data covers socioeconomic characterisics of Russian regions, as well as variables on TV and Internet coverage in the each subject of the Russian Federation. The dataset contributes with the new variables on electoral coverage during both Presidentional and State Duma electoral campaigns which capture the amount of messages on elections in Russian regional media sources and amount of messages on electoral fraud. Data covers the 2007, 2011, 2016, 2021 State Duma elections and 2008, 2012, 2018 Presidential elections. 
+
 | Variable Name | Variable Label and Variable Description | Scale and timeframe of coverage | Source|
 | --- | --- |--- |--- |
 | fad_id | ID of the federal administrative district |Numeric |
