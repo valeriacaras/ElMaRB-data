@@ -1,0 +1,405 @@
+---
+title: "Visualisation of data on cross-regional Electoral Malpractice in Russia"
+author: "ElMaRB project"
+date: "1/23/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_chunk$set(fig.width=14, fig.height=10)
+```
+
+
+
+
+```{r, results='hide', error=FALSE, warning=FALSE,echo=FALSE,message=FALSE}
+setwd("/Users/valeriacaras/Downloads/R Studio")
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(readxl)
+library(reshape2)
+library(plotly)
+
+data_RUregions <- read_excel("data_RUregions_112021.xlsx")
+#summary(data_RUregions)
+
+```
+
+
+### Average number of messages on electoral fraud for all elections in the dataset
+```{r,error=FALSE, warning=FALSE, echo=FALSE, fig.width=36, fig.height=8}
+
+
+avgdata <- read_excel("avg_data.xlsx")
+#install.packages("reshape2")
+
+avgdata2 <- melt(avgdata, id.vars='elections')
+
+#average_messages_per_election <- avgdata2 %>% ggplot(., aes(y = value, x = elections, fill = variable)) + geom_bar(stat='identity', position='dodge') + geom_text(aes(label = value), size = 3, vjust = 1.5, position = position_dodge(.9))
+#average_messages_per_election
+
+
+average_messages_per_election1 <- avgdata2 %>% 
+  ggplot(., aes(y = value, x = elections,  fill = variable)) + geom_col() + geom_text(aes(label = value), size = 8, vjust = 0.8) + 
+  theme_minimal() + 
+  labs(y = "Number of messages in regional media") + theme(legend.title  = element_blank(), legend.text = element_text(size=26),axis.text.x = element_text(size = 30), axis.title.x  = element_blank(),axis.title.y  = element_text(size = 30), axis.text.y = element_text(size=26)) + 
+  scale_fill_discrete(labels =  c("Average number of messages on elections", "Average number of messages on electoral fraud")) +
+  scale_x_discrete(limits = c("State Duma 2007", "Presidential 2008","State Duma 2011","Presidential 2012","State Duma 2016",
+                              "Presidential 2018","State Duma 2021"))
+  
+average_messages_per_election1
+
+
+```
+
+```{r,error=FALSE, warning=FALSE, echo=FALSE, fig.width=36, fig.height=8}
+
+
+average_messages_per_election2 <- avgdata2 %>% 
+  ggplot(., aes(y = value, x = elections,  fill = variable)) + geom_col(position = "fill") + 
+  theme_minimal() + 
+  labs(y = "Messages in regional media") + theme(legend.title  = element_blank(), legend.text = element_text(size=26),axis.text.x = element_text(size = 30), axis.title.x  = element_blank(),axis.title.y  = element_text(size = 30),axis.text.y = element_text(size=26)) + 
+  scale_fill_discrete(labels =  c("Messages on elections", "% messages on electoral fraud")) +
+  scale_x_discrete(limits = c("State Duma 2007", "Presidential 2008","State Duma 2011","Presidential 2012","State Duma 2016",
+                              "Presidential 2018","State Duma 2021")) +   scale_y_continuous(labels = scales::percent)
+  
+average_messages_per_election2
+
+```
+
+
+
+## Share of messages on electoral fraud from the total amount of messages {.tabset .tabset-pills}
+
+### State Duma elections 2007
+```{r,error=FALSE, warning=FALSE, fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+
+share_regions2007 <- data_RUregions %>% filter(per_violmess_all_parl07 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_parl07), x = per_violmess_all_parl07)) + geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + labs(x = "share by region") + theme(axis.title.y = element_blank())
+#share_regions2007
+
+share_regions2007_plotly <-ggplotly(share_regions2007, tooltip = c("x"))
+share_regions2007_plotly
+```
+
+### Presidential elections 2008
+```{r,error=FALSE, warning=FALSE, fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+share_regions_presid2008  <- data_RUregions %>% filter(per_violmess_all_pres08 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_pres08), x = per_violmess_all_pres08)) + geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + labs(x = "share by region") + theme(axis.title.y = element_blank())
+#share_regions_presid2012
+
+share_regions_presid2008_plotly <-ggplotly(share_regions_presid2008, tooltip = c("x"))
+share_regions_presid2008_plotly
+```
+
+### State Duma elections 2011
+```{r,error=FALSE, warning=FALSE, fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+share_regions2011 <- data_RUregions %>% filter(per_violmess_all_parl11 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_parl11), x = per_violmess_all_parl11)) + geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + labs(x = "share by region") + theme(axis.title.y = element_blank())
+#share_regions2011
+
+share_regions2011_plotly <-ggplotly(share_regions2011, tooltip = c("x"))
+share_regions2011_plotly
+```
+
+
+### Presidential elections 2012
+```{r,error=FALSE, warning=FALSE, fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+share_regions_presid2012  <- data_RUregions %>% filter(per_violmess_all_pres12 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_pres12), x = per_violmess_all_pres12)) + geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + labs(x = "share by region") + theme(axis.title.y = element_blank())
+#share_regions_presid2012
+
+share_regions_presid2012_plotly <-ggplotly(share_regions_presid2012, tooltip = c("x"))
+share_regions_presid2012_plotly
+```
+
+
+### State Duma elections 2016
+```{r,error=FALSE, warning=FALSE, fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+share_regions2016 <- data_RUregions %>% filter(per_violmess_all_parl16 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_parl16), x = per_violmess_all_parl16)) + geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + labs(x = "share by region") + theme(axis.title.y = element_blank())
+#share_regions2016
+
+share_regions2016_plotly <-ggplotly(share_regions2016, tooltip = c("x"))
+share_regions2016_plotly
+```
+
+### Presidential elections 2018
+```{r,error=FALSE, warning=FALSE, fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+share_regions_presid2018 <- data_RUregions %>% filter(per_violmess_all_pres18 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_pres18), x = per_violmess_all_pres18)) + geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + labs(x = "share by region") + theme(axis.title.y = element_blank())
+#share_regions_presid2018 
+
+share_regions_presid2018_plotly <-ggplotly(share_regions_presid2018, tooltip = c("x"))
+share_regions_presid2018_plotly
+```
+
+### State Duma elections 2021
+
+```{r,error=FALSE, warning=FALSE, echo=FALSE,fig.align='left',fig.width=12, fig.height=10}
+
+data_RUregions$per_violmess_all_parl21 <- round(data_RUregions$per_violmess_all_parl21, digits = 2)
+
+share_regions2021 <- data_RUregions %>% filter(per_violmess_all_parl21 > 0) %>%
+  ggplot(., aes(y = reorder(r_name, per_violmess_all_parl21), x = per_violmess_all_parl21)) + 
+  geom_col(position = "dodge", colour = "black", fill = "indianred2") + theme_minimal() + 
+  labs(x = "share by region") + 
+  theme(axis.title.y = element_blank())
+#share_regions2021
+
+share_regions2021_plotly <-ggplotly(share_regions2021, tooltip = c("x"))
+share_regions2021_plotly
+```
+
+
+
+
+## {-}
+
+
+
+## Total number of messages on elections and violations by region  {.tabset .tabset-pills}
+
+### State Duma elections 2007
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,fig.width=12, fig.height=10}
+
+data07elections <- data_RUregions %>% select(r_name, elect_mess_parl2007, mess_fals_parl_2007)
+data07elections2 <- melt(data07elections, id.vars='r_name')
+
+messages_per_2007election <- data07elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: State Duma elections 2007") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2007election
+
+ggplotly(messages_per_2007election, tooltip = c("y"))  
+
+```
+
+### Presidential elections 2008
+```{r,error=FALSE, warning=FALSE,fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+
+data08elections <- data_RUregions %>% select(r_name, elect_mess_pres2008, mess_fals_presid_2008)
+data08elections2 <- melt(data08elections, id.vars='r_name')
+
+messages_per_2008_preselection <- data08elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: Presidential elections 2012") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2008_preselection
+
+messages_per_2008_preselection_plotly <-ggplotly(messages_per_2008_preselection, tooltip = c("y"))
+messages_per_2008_preselection_plotly
+```
+
+### State Duma elections 2011
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,fig.width=12, fig.height=10}
+
+data11elections <- data_RUregions %>% select(r_name, elect_mess_parl2011, mess_fals_parl_2011)
+data11elections2 <- melt(data11elections, id.vars='r_name')
+
+messages_per_2011election <- data11elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: State Duma elections 2011") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2011election
+
+messages_per_2011election_plotly <-ggplotly(messages_per_2011election, tooltip = c("y"))
+messages_per_2011election_plotly
+```
+
+
+### Presidential elections 2012
+```{r,error=FALSE, warning=FALSE,fig.align='left',echo=FALSE,fig.width=12, fig.height=10}
+
+data12elections <- data_RUregions %>% select(r_name, elect_mess_pres2012, mess_fals_presid_2012)
+data12elections2 <- melt(data12elections, id.vars='r_name')
+
+messages_per_2012_preselection <- data12elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: Presidential elections 2012") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2012_preselection
+
+messages_per_2012_preselection_plotly <-ggplotly(messages_per_2012_preselection, tooltip = c("y"))
+messages_per_2012_preselection_plotly
+```
+
+### State Duma elections 2016
+``` {r,error=FALSE, warning=FALSE, echo=FALSE,message=FALSE,fig.width=12, fig.height=10}
+data16elections <- data_RUregions %>% select(r_name, elect_mess_parl2016, mess_fals_parl_2016)
+data16elections2 <- melt(data16elections, id.vars='r_name')
+
+messages_per_2016election <- data16elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: State Duma elections 2016") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2016election
+
+
+messages_per_2016election_plotly <-ggplotly(messages_per_2016election, tooltip = c("y"))
+messages_per_2016election_plotly
+```
+
+
+
+### Presidential elections 2018
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,fig.width=12, fig.height=10}
+
+data18elections <- data_RUregions %>% select(r_name, elect_mess_pres2018, mess_fals_presid_2018)
+data18elections2 <- melt(data18elections, id.vars='r_name')
+
+messages_per_2018_preselection <- data18elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: Presidential elections 2018") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2018_preselection
+
+messages_per_2018_preselection_plotly <-ggplotly(messages_per_2018_preselection, tooltip = c("y"))
+messages_per_2018_preselection_plotly
+```
+
+### State Duma elections 2021
+
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,fig.width=12, fig.height=10}
+
+data21elections <- data_RUregions %>% select(r_name, elect_mess_parl_2021, mess_fals_parl_2021)
+data21elections2 <- melt(data21elections, id.vars='r_name')
+
+messages_per_2021election <- data21elections2 %>% filter(r_name != "Moskva" & value > 0) %>% 
+  ggplot(., aes(y = value, x = reorder(r_name, value), fill = variable)) + geom_col() + theme_minimal() + labs(y = "Number of messages in regional media: State Duma elections 2021") + theme(legend.title  = element_blank(), axis.title.y = element_blank()) + scale_fill_discrete(labels =  c("Number of messages on elections", "Number of messages on electoral fraud")) + coord_flip()
+#messages_per_2021election
+
+messages_per_2021election_plotly <-ggplotly(messages_per_2021election, tooltip = c("y")) 
+messages_per_2021election_plotly
+```
+
+
+
+## {-}
+
+
+
+
+## Gross regional product and share of messages on electoral fraud  {.tabset .tabset-pills}
+
+### State Duma elections 2011
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,message=FALSE,fig.width=8, fig.height=6}
+
+grp_elections2011 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl11, y = log(grp_capita2011))) + geom_point(aes(label = r_name),colour = "indianred2", size = 3) + theme_minimal()+ labs(y = "Gross regional product in 2011", x = "% electoral violations in State  Duma elections 2011") +  geom_smooth(method='loess') 
+#grp_elections2011
+
+ggplotly(grp_elections2011)
+```
+
+### Presidential elections 2012
+```{r,error=FALSE, warning=FALSE,fig.align='left',echo=FALSE,message=FALSE,fig.width=8, fig.height=6}
+grp_elections2012 <-ggplot(data_RUregions, aes(x = per_violmess_all_pres12, y = log(grp_capita2012))) +
+  geom_point(aes(label =  r_name), colour = "indianred2", size = 3) + theme_minimal() + labs(y = "Gross regional product in 2012", x = "% messages on electoral violations in Presendiatial elections 2012") + geom_smooth(method='loess') 
+#grp_elections2012
+
+ggplotly(grp_elections2012)
+```
+
+### State Duma elections 2016
+
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,message=FALSE,fig.width=8, fig.height=6}
+grp_elections2016 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl16, y = log(grp_capita2016))) + geom_point(aes(label = r_name),colour = "indianred2", size = 3) + theme_minimal()+ labs(y = "Gross regional product in 2016", x = "% electoral violations in State  Duma elections 2016") +  geom_smooth(method='loess') 
+#grp_elections2016
+
+ggplotly(grp_elections2016)
+```
+
+### Presidential elections 2018
+```{r,error=FALSE, warning=FALSE,fig.align='left',echo=FALSE,message=FALSE,fig.width=8, fig.height=6}
+grp_elections2018 <-ggplot(data_RUregions, aes(x = per_violmess_all_pres18, y = log(grp_capita2018))) +
+  geom_point(aes(label =  r_name), colour = "indianred2", size = 3) + theme_minimal() + labs(y = "Gross regional product in 2018", x = "% messages on electoral violations in Presendiatial elections 2018") + geom_smooth(method='loess') 
+#grp_elections2018
+
+ggplotly(grp_elections2018)
+```
+
+### State Duma elections 2021
+```{r,error=FALSE, warning=FALSE,fig.align='left', echo=FALSE,message=FALSE,fig.width=8, fig.height=6}
+## выборы 2021 и ВРП за 2018 год (последнее подступное измерение)
+grp_elections2021 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl21, y = log(grp_capita2018))) +
+  geom_point(aes(label =  r_name), colour = "indianred2", size = 3) + theme_minimal() + labs(y = "Gross regional product in 2018", x = " electoral violations in State  Duma elections 2021") +  geom_smooth(method='loess') 
+#grp_elections2021
+
+ggplotly(grp_elections2021)
+```
+
+## {-}
+
+
+
+
+## Turnout and messages  on electoral fraud  {.tabset .tabset-pills}
+
+
+### State Duma elections 2007
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE,message=FALSE,fig.width=8, fig.height=6}
+turnout_mess_2007 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl07, y = turnout_gd2007)) +
+  geom_point(aes(label =  r_name),colour = "indianred2", size = 3) + theme_minimal() +  labs(y = "Turnout %", x = "% messages on electoral violations in State Duma elections 2007") + geom_smooth(method="loess") 
+#turnout_mess_2011
+
+ggplotly(turnout_mess_2007)
+```
+
+
+### Presidential elections 2008
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE, message=FALSE,fig.width=8, fig.height=6}
+
+turnout_mess_2008 <-ggplot(data_RUregions, aes(x = per_violmess_all_pres08, y = turnout_presd_08)) +
+  geom_point(aes(label =  r_name),colour = "indianred2", size = 3) + theme_minimal() +  labs(y = "Turnout %", x = "% messages on electoral violations in Presidential elections 2008") + geom_smooth(method = "lm") 
+#turnout_mess_2008
+ggplotly(turnout_mess_2008)
+```
+
+### State Duma elections 2011
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE,message=FALSE,fig.width=8, fig.height=6}
+turnout_mess_2011 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl11, y = turnout_gd2011)) +
+  geom_point(aes(label =  r_name),colour = "indianred2", size = 3) + theme_minimal() +  labs(y = "Turnout %", x = "% messages on electoral violations in State Duma elections 2011") + geom_smooth(method="loess") 
+#turnout_mess_2011
+
+ggplotly(turnout_mess_2011)
+```
+
+### Presidential elections 2012
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE,message=FALSE,fig.width=8, fig.height=6}
+turnout_mess_2012 <-ggplot(data_RUregions, aes(x = per_violmess_all_pres12, y = turnout_presd_2012)) +
+  geom_point(aes(label =  r_name),colour = "indianred2", size = 3) + theme_minimal() +  labs(y = "Turnout %", x = "% messages on electoral violations in Presidential elections 2012") + geom_smooth(method="loess") 
+#turnout_mess_2012
+ggplotly(turnout_mess_2012)
+```
+
+
+### State Duma elections 2016
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE,message=FALSE,fig.width=8, fig.height=6}
+turnout_mess_2016 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl16, y = turnout_gd2016)) +
+  geom_point(aes(label =  r_name),colour = "indianred2", size = 3) + theme_minimal() +  labs(y = "Turnout %", x = "% messages on electoral violations in State Duma elections 2016") + geom_smooth(method="loess") 
+#turnout_mess_2016
+
+turnout_mess_2016_plotly<- ggplotly(turnout_mess_2016)
+turnout_mess_2016_plotly
+```
+
+
+
+### Presidential elections 2018
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE,message=FALSE,fig.width=8, fig.height=6}
+turnout_mess_2018 <-ggplot(data_RUregions, aes(x = per_violmess_all_pres18, y = turnout_presd_2018)) +
+  geom_point(aes(label =  r_name),colour = "indianred2", size = 3) + theme_minimal() +  labs(y = "Turnout %", x = "% messages on electoral violations in Presidential elections 2018") + geom_smooth(method="loess") 
+#turnout_mess_2018
+
+ggplotly(turnout_mess_2018)
+```
+
+
+### State Duma elections 2021
+```{r, error=FALSE, warning=FALSE,fig.align='left',echo = FALSE,message=FALSE,fig.width=8, fig.height=6}
+
+data_RUregions$turnout_gd2021 <- as.numeric(data_RUregions$turnout_gd2021)
+
+turnout_mess_2021 <-ggplot(data_RUregions, aes(x = per_violmess_all_parl21, y = turnout_gd2021)) +
+  geom_point(aes(label = r_name),colour = "indianred2", size = 2) + theme_minimal() +  
+  labs(y = "Turnout %", x = "% messages on electoral violations in State Duma elections 2021") +
+  geom_smooth(method='loess') 
+#turnout_mess_2021
+
+ggplotly(turnout_mess_2021)
+```
+
+## {-}
+
+
