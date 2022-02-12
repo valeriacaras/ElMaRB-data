@@ -2,6 +2,12 @@
 
 ## Data on cross-regional Electoral Malpractice in Russia
 
+*Release: 1.1 version*
+
+*Date: 12 February 2022*
+
+*Added: percent of voting for the main political parties in the State Duma elections and percent of voting for candidates in the Presidential elections*
+
 *Release: 1 version*
 
 *Date: 15 November 2021*
@@ -51,11 +57,11 @@ The data covers socioeconomic characterisics of Russian regions, as well as vari
 | crude_fals_parl_year | Coverage of electoral fraud by regional mass media. The results for query “(выборы and (государственная and дума)) and (фальсификация or фальсифицировать or вбросы or махинация)”. The search was filtered for the dates of the electoral campaign and regional media. | Numeric, years: 2007, 2011, 2016, 2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
 | elect_mess_parl_year | Coverage of elections by regional media. The results for query “(выборы and (государственная and дума))”. The search was filtered for the dates of the electoral campaign and regional media | Numeric, years: 2007, 2011, 2016, 2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
 | per_violmess_all_parl_year | Percent of mentions of falsifications in media from the total number of messages covering the electoral campaign |  Interval (share), years: 2007, 2011, 2016, 2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
-
-
-
-
-
+| ur_voting_year | Percent of vote for the United Russia party at the regional level | Interval (percent), years: 2007, 2011, 2016, 2021 | [Central Electoral Commission](url) |
+| kprf_voting_year | Percent of vote for the Communist Party of the Russian Federation party at the regional level | Interval (percent), years: 2007, 2011, 2016, 2021 | [Central Electoral Commission](url) |
+| ldpr_voting_year | Percent of vote for the Liberal Democratic Party of Russia at the regional level | Interval (percent), years: 2007, 2011, 2016 | [Central Electoral Commission](url) |
+| sr_voting_year | Percent of vote for the A Just Russia — For Truth at the regional level | Interval (percent), years: 2007, 2011 | [Central Electoral Commission](url) |
+| pre_candidatesurname_year | Percent of vote for candidate at the regional level in the Presidential elections| Interval (percent), years: 2008, 2012,2018 | [Central Electoral Commission](url) |
 
  
 
