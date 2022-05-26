@@ -1,6 +1,13 @@
 # Electoral Malpractice, Cyber-security, and Political Consequences in Russia and Beyond Project
 
 ## Data on cross-regional Electoral Malpractice in Russia
+
+*Release: 1.3 version*
+
+*Date: 26 May 2022*
+
+*Added: Overall numbers of messages in regional media during the electoral campaigns. The variables cover periods six months before elections, three months before elections, on the electoral day and one day after, one month after elections*
+
 *Release: 1.2 version*
 
 *Date: 21 February 2022*
@@ -72,6 +79,11 @@ The data covers socioeconomic characterisics of Russian regions, as well as vari
 | elections_year_viol3m | Number of messages on electoral violations in regional media three months prior to elections. The results for query “(выборы and (президент Россия)) and (фальсификация or фальсифицировать or вбросы or махинация)”.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
 | elections_year_day_viol | Number of messages on electoral violations in regional media on elections day and the following day. The results for query “(выборы and (президент Россия)) and (фальсификация or фальсифицировать or вбросы or махинация)”.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
 | elections_year_1mlater_viol | Number of messages on electoral violations in regional media one month after elections. The results for query “(выборы and (президент Россия)) and (фальсификация or фальсифицировать or вбросы or махинация)”.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
+| elections_year_6mo_all | Number of all messages in regional media six months prior to elections. The results for the blank query were filtered for the electoral campaign period and regional media.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
+| elections_year_3mo_all | Number of all messages in regional media six months prior to elections. The results for the blank query were filtered for the electoral campaign period and regional media.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
+| elections_year_day_all | Number of all messages in regional media six months prior to elections. The results for the blank query were filtered for the electoral campaign period and regional media.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
+| elections_year_1mo_all | Number of all messages in regional media six months prior to elections. The results for the blank query were filtered for the electoral campaign period and regional media.| Numeric, years: 2007,2008, 2011,2012,2016,2018,2021 | [Integrum World Wide. Electronic Portal of Russia and the CIS](url) |
+
 
 
  
